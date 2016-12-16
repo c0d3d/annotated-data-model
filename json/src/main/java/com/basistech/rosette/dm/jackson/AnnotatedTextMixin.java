@@ -23,6 +23,7 @@ import com.basistech.rosette.dm.Embeddings;
 import com.basistech.rosette.dm.Entity;
 import com.basistech.rosette.dm.LanguageDetection;
 import com.basistech.rosette.dm.ListAttribute;
+import com.basistech.rosette.dm.RegionalDialectDetection;
 import com.basistech.rosette.dm.RelationshipMention;
 import com.basistech.rosette.dm.ScriptRegion;
 import com.basistech.rosette.dm.Sentence;
@@ -106,6 +107,9 @@ public abstract class AnnotatedTextMixin {
 
     @JsonIgnore
     public abstract LanguageDetection getWholeTextLanguageDetection();
+
+    @JsonIgnore
+    public abstract RegionalDialectDetection getWholeTextRegionalDialectDetection();
 
     @JsonIgnore
     public abstract ListAttribute<CategorizerResult> getCategorizerResults();

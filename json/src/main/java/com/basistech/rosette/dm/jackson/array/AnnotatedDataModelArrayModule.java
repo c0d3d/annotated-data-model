@@ -35,6 +35,7 @@ import com.basistech.rosette.dm.Mention;
 import com.basistech.rosette.dm.MorphoAnalysis;
 import com.basistech.rosette.dm.Name;
 import com.basistech.rosette.dm.RawData;
+import com.basistech.rosette.dm.RegionalDialectDetection;
 import com.basistech.rosette.dm.RelationshipComponent;
 import com.basistech.rosette.dm.RelationshipMention;
 import com.basistech.rosette.dm.ScriptRegion;
@@ -100,6 +101,8 @@ public class AnnotatedDataModelArrayModule extends EnumModule {
         context.setMixInAnnotations(KoreanMorphoAnalysis.class, KoreanMorphoAnalysisMixin.class);
         context.setMixInAnnotations(LanguageDetection.class, LanguageDetectionArrayMixin.class);
         context.setMixInAnnotations(LanguageDetection.DetectionResult.class, LanguageDetectionArrayMixin.DetectionResultMixin.class);
+        context.setMixInAnnotations(RegionalDialectDetection.class, RegionalDialectDetectionArrayMixin.class);
+        context.setMixInAnnotations(RegionalDialectDetection.DialectDetectionResult.class, RegionalDialectDetectionArrayMixin.DialectDetectionResultMixin.class);
         context.setMixInAnnotations(ListAttribute.class, ListAttributeArrayMixin.class);
         context.setMixInAnnotations(Mention.class, MentionMixin.class);
         context.setMixInAnnotations(MorphoAnalysis.class, MorphoAnalysisMixin.class);

@@ -50,7 +50,11 @@ enum AttributeKey {
     TOKEN("token"),
     TRANSLATED_DATA("translatedData"),
     TRANSLATED_TOKENS("translatedTokens"),
-    TOPIC_RESULTS("topicResults");
+    TOPIC_RESULTS("topicResults"),
+    /**
+     * List of regional dialect detections for the entire document.
+     */
+    REGIONAL_DIALECT_DETECTION("regionalDialectDetection");
 
     private final String key;
 

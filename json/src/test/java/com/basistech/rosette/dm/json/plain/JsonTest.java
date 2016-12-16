@@ -31,6 +31,7 @@ import com.basistech.rosette.dm.LanguageDetection;
 import com.basistech.rosette.dm.ListAttribute;
 import com.basistech.rosette.dm.Mention;
 import com.basistech.rosette.dm.MorphoAnalysis;
+import com.basistech.rosette.dm.RegionalDialectDetection;
 import com.basistech.rosette.dm.RelationshipComponent;
 import com.basistech.rosette.dm.RelationshipMention;
 import com.basistech.rosette.dm.ScriptRegion;
@@ -76,6 +77,7 @@ public class JsonTest extends AdmAssert {
     private com.basistech.rosette.dm.ResolvedEntity resolvedEntity;
     private LanguageDetection languageDetectionRegion;
     private LanguageDetection languageDetection;
+    private RegionalDialectDetection dialectDetection;
     private ScriptRegion scriptRegion;
     private Sentence sentence;
     private MorphoAnalysis morphoAnalysis;
@@ -179,6 +181,13 @@ public class JsonTest extends AdmAssert {
         ldBuilder.extendedProperty("ldw-ex", "ldw-ex-val");
         languageDetection = ldBuilder.build();
         builder.wholeDocumentLanguageDetection(ldBuilder.build());
+
+        List<RegionalDialectDetection.DialectDetectionResult> dialectDetectionResults = Lists.newArrayList();
+        dialectDetectionResults.add(new RegionalDialectDetection.DialectDetectionResult.Builder().countryCode("USA").countryName("America").relativeError(0.2d).score(0.75d).build());
+        dialectDetectionResults.add(new RegionalDialectDetection.DialectDetectionResult.Builder().countryCode("CA").countryName("Canada").relativeError(0.5d).score(0.25d).build());
+        RegionalDialectDetection.Builder regionalBuilder = new RegionalDialectDetection.Builder(0, THIS_IS_THE_TERRIER_SHOT_TO_BOSTON.length(), dialectDetectionResults);
+        dialectDetection = regionalBuilder.build();
+        builder.wholeDocumentDialectDetection(regionalBuilder.build());
 
         ListAttribute.Builder<ScriptRegion> srListBuilder = new ListAttribute.Builder<>(ScriptRegion.class);
         ScriptRegion.Builder srBuilder = new ScriptRegion.Builder(0, builder.data().length(), ISO15924.Latn);
@@ -391,6 +400,13 @@ public class JsonTest extends AdmAssert {
         ldBuilder.extendedProperty("ldw-ex", "ldw-ex-val");
         languageDetection = ldBuilder.build();
         builder.wholeDocumentLanguageDetection(ldBuilder.build());
+
+        List<RegionalDialectDetection.DialectDetectionResult> dialectDetectionResults = Lists.newArrayList();
+        dialectDetectionResults.add(new RegionalDialectDetection.DialectDetectionResult.Builder().countryCode("USA").countryName("America").relativeError(0.2d).score(0.75d).build());
+        dialectDetectionResults.add(new RegionalDialectDetection.DialectDetectionResult.Builder().countryCode("CA").countryName("Canada").relativeError(0.5d).score(0.25d).build());
+        RegionalDialectDetection.Builder regionalBuilder = new RegionalDialectDetection.Builder(0, THIS_IS_THE_TERRIER_SHOT_TO_BOSTON.length(), dialectDetectionResults);
+        dialectDetection = regionalBuilder.build();
+        builder.wholeDocumentDialectDetection(regionalBuilder.build());
 
         ListAttribute.Builder<ScriptRegion> srListBuilder = new ListAttribute.Builder<>(ScriptRegion.class);
         ScriptRegion.Builder srBuilder = new ScriptRegion.Builder(0, builder.data().length(), ISO15924.Latn);
@@ -672,6 +688,8 @@ public class JsonTest extends AdmAssert {
         assertEquals(sentimentResult, read.getSentimentResults().get(0));
 
         assertEquals(topicResult, read.getTopicResults().get(0));
+
+        assertEquals(dialectDetection, read.getWholeTextRegionalDialectDetection());
     }
 
     @Test
@@ -746,6 +764,8 @@ public class JsonTest extends AdmAssert {
 
         Embeddings readEmbeddings = read.getEmbeddings();
         assertEquals(embeddings, readEmbeddings);
+
+        assertEquals(dialectDetection, read.getWholeTextRegionalDialectDetection());
     }
 
     @Test

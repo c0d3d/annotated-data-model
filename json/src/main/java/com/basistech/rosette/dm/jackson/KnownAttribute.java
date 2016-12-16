@@ -23,6 +23,7 @@ import com.basistech.rosette.dm.Embeddings;
 import com.basistech.rosette.dm.Entity;
 import com.basistech.rosette.dm.LanguageDetection;
 import com.basistech.rosette.dm.ListAttribute;
+import com.basistech.rosette.dm.RegionalDialectDetection;
 import com.basistech.rosette.dm.RelationshipComponent;
 import com.basistech.rosette.dm.RelationshipMention;
 import com.basistech.rosette.dm.ScriptRegion;
@@ -49,6 +50,7 @@ public enum KnownAttribute {
     @SuppressWarnings("deprecation")
     RESOLVED_ENTITY("resolvedEntities", com.basistech.rosette.dm.ResolvedEntity.class),
     LANGUAGE_DETECTION("languageDetection", LanguageDetection.class),
+    REGIONAL_DIALECT_DETECTION("regionalDialectDetection", RegionalDialectDetection.class),
     SCRIPT_REGION("scriptRegion", ScriptRegion.class),
     SENTENCE("sentence", Sentence.class),
     TOKEN("token", Token.class),

@@ -311,7 +311,7 @@ public class LanguageDetection extends Attribute implements Serializable {
          * @return the new language detection
          */
         public LanguageDetection build() {
-            // we do not null this list when empty. Should we?
+            // No need to null empty lists, covered in LanguageDetection constructor.
             return new LanguageDetection(startOffset, endOffset, detectionResults, buildExtendedProperties());
         }
 

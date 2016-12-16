@@ -221,6 +221,15 @@ public class AnnotatedText implements Serializable {
     }
 
     /**
+     * Returns the regional dialect detection for the entire text.
+     *
+     * @return The regional dialect detection for the entire text.
+     */
+    public RegionalDialectDetection getWholeTextRegionalDialectDetection() {
+        return (RegionalDialectDetection)attributes.get(AttributeKey.REGIONAL_DIALECT_DETECTION.key());
+    }
+
+    /**
      * Returns the list of entity mentions.
      *
      * @return the list of entity mentions
@@ -799,6 +808,17 @@ public class AnnotatedText implements Serializable {
         }
 
         /**
+         * Attaches a whole-document regional dialect detection.
+         *
+         * @param dialectDetection the dialect detection
+         * @return this
+         */
+        public Builder wholeDocumentDialectDetection(RegionalDialectDetection dialectDetection) {
+            attributes.put(AttributeKey.REGIONAL_DIALECT_DETECTION.key(), dialectDetection);
+            return this;
+        }
+
+        /**
          * Adds an attribute.
          *
          * @param key       the attribute key. See {@link AttributeKey}.
@@ -886,5 +906,7 @@ public class AnnotatedText implements Serializable {
         public AnnotatedText build() {
             return new AnnotatedText(data, attributes, documentMetadata, null);
         }
+
+
     }
 }

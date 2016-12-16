@@ -18,6 +18,7 @@ package com.basistech.rosette.dm.json.array;
 import com.basistech.rosette.dm.AnnotatedText;
 import com.basistech.rosette.dm.LanguageDetection;
 import com.basistech.rosette.dm.ListAttribute;
+import com.basistech.rosette.dm.RegionalDialectDetection;
 import com.basistech.rosette.dm.Sentence;
 import com.basistech.util.ISO15924;
 import com.basistech.util.LanguageCode;
@@ -101,5 +102,20 @@ public class ListAttributeTest extends AdmAssert {
         String json = objectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(languageDetection);
         LanguageDetection readBack = objectMapper().readValue(json, LanguageDetection.class);
         assertEquals(languageDetection, readBack);
+    }
+
+    @Test
+    public void regionalDialectDetection() throws Exception {
+        List<RegionalDialectDetection.DialectDetectionResult> dets;
+        RegionalDialectDetection.Builder rddBuilder;
+
+        dets = Lists.newArrayList();
+        dets.add(new RegionalDialectDetection.DialectDetectionResult.Builder().countryCode("USA").countryName("US").relativeError(1.0).score(0.1d).build());
+        rddBuilder = new RegionalDialectDetection.Builder(0, 100, dets);
+        rddBuilder.extendedProperty("rddw-ex", "rddw-ex-val");
+        RegionalDialectDetection dialectDetection = rddBuilder.build();
+        String json = objectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(dialectDetection);
+        RegionalDialectDetection readBack = objectMapper().readValue(json, RegionalDialectDetection.class);
+        assertEquals(dialectDetection, readBack);
     }
 }
